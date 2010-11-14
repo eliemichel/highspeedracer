@@ -88,6 +88,8 @@ def diffuser_ssr(clients, cl, msg) :
 # ---------- ---------- ---------- #
 
 ## Main ##
+print("-- Serveur HSR --")
+print("--       v3.2  --")
 
 sock = socket(AF_INET, SOCK_STREAM)
 sock.bind((host, port))
@@ -97,8 +99,12 @@ q = Queue()
 retour = Queue()
 clients = ()
 id = 0
-
 vaisseaux = {}
+
+course = False # Si la course est lancee ou non
+tps_lancement = clock() # Date du lancement du serveur
+maxTps = 20 # Temps d'attente limite
+maxJoueurs = 3 # Nombre maximum de joueurs
 
 #@ sock blocking mode : OFF
 
@@ -136,6 +142,12 @@ while run :
 				for id, vsx in vaisseaux.items() :
 					paquet = b'\x22\x01' + dump([id, vsx])
 					ret[2].send(paquet)
+	
+	if ((clock() - tps_lancement > maxTps and len(clients) > 0) or id >= maxJoueurs) and not course :
+		course = True
+		msg = [b'\x42',  0]
+		diffuser(clients, msg)
+		print("---GO---")
 	
 sock.close()
 for c in clients :
