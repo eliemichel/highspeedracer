@@ -149,6 +149,7 @@ while run :
 		diffuser(clients, msg)
 		print("---GO---")
 	
+	
 sock.close()
 for c in clients :
 	c.close()
