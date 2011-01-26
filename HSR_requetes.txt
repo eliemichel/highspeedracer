@@ -1,0 +1,80 @@
+Requêtes HSR master :
+
+URL : http://www.highspeedracer.webou.net/BDD.php?R=
+
+Ajouter ensuite la requête (sans espaces).
+Syntaxe : mot_clef{info}
+
+Mots clef possible :
+ **filtre**
+	Type :
+		liste de strings (ex : "id", "pseudo")
+	
+	Valeurs possibles :
+		Toutes, mais des valeurs abérentes provoqueront des erreurs ou seront sans effet.
+	
+	Rôle :
+		Défini les types d'information à retourner.
+		NB : Pour la table 'joueurs', le filtre sera toujours {"id", "pseudo", "valide", "gradejeu", "avatar"} pour des raisons de sécurité.
+
+ **source**
+	Type :
+		string (ne pas oublier les guillemets ")
+	
+	Valeurs possibles :
+		"joueurs" | "vaisseaux" | "news"
+	
+	Rôle :
+		Table dans laquelle on fait la requête.
+
+ **condition**
+	Type :
+		liste d'égalités de strings (ex : "pseudo"="moi", "motdepasse"="azerty")
+	
+	Valeurs possibles :
+		Toutes, mais des valeurs abérentes provoqueront des erreurs ou seront sans effet.
+	
+	Rôle :
+		Conditions que doivent respecter les données retournées
+
+ **action**
+	Type :
+		string
+	
+	Valeurs possibles :
+		"lire" | "ajouter"
+	
+	Rôle :
+		Défini le type de requête à affectuer (lecture de la table, ajout de lignes, modifications, etc)
+		Valeur par défaut : "lire"
+
+ **donnees**
+	Type :
+		liste de strings | liste d'égalités de strings | ... (dépend de l'action)
+	
+	Valeurs possibles :
+		Toutes, mais des valeurs abérentes provoqueront des erreurs ou seront sans effet.
+	
+	Rôle :
+		Envoie des données à la base. Elle seront traitées différemment selon l'action demandée.
+
+
+NB : La liste des valeurs possibles et des différents mots clefs disponibles n'est pas exaustive.
+	 Elle ne montre que ce qui est déjà implémenté.
+
+Exemple :
+ - Récupération du nom des serveurs sans mot de passe :
+	http://www.highspeedracer.webou.net/BDD.php?R=source{"serveurs"}condition{"motdepasse"=""}filtre{"nom"}
+
+Syntaxe des réponses :
+ - Entre chaque case : #SEPARATION#
+ - Entre chaque ligne : #FIN_DE_CELLULE#
+
+Exemple :
+ - http://www.highspeedracer.webou.net/BDD.php?R=source{"serveurs"}filtre{"nom", "maxjoueurs"}
+   >>> Serveur officiel#SEPARATION#2#SEPARATION##FIN_DE_CELLULE#Test#SEPARATION#5#SEPARATION##FIN_DE_CELLULE#
+
+
+
+
+
