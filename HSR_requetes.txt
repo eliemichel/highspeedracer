@@ -22,7 +22,7 @@ Mots clef possible :
 		string (ne pas oublier les guillemets ")
 	
 	Valeurs possibles :
-		"joueurs" | "vaisseaux" | "news"
+		"joueurs" | "vaisseaux" | "news" | "serveurs"
 	
 	Rôle :
 		Table dans laquelle on fait la requête.
@@ -73,7 +73,6 @@ Syntaxe des réponses :
 Exemple :
  - http://www.highspeedracer.webou.net/BDD.php?R=source{"serveurs"}filtre{"nom", "maxjoueurs"}
    >>> Serveur officiel#SEPARATION#2#SEPARATION##FIN_DE_CELLULE#Test#SEPARATION#5#SEPARATION##FIN_DE_CELLULE#
-
 
 
 
